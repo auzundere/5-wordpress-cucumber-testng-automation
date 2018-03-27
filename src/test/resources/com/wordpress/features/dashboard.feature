@@ -1,17 +1,12 @@
 Feature: Title of your feature
   I want to use this template for my feature file
 
-Background:
-Given I want to write a step with precondition
+Background: 
 
+ @Dev
   Scenario: Title of your scenario 
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
-
+	Given I login to the blog
+    
   @tag2
   Scenario Outline: Title of your scenario outline
     Given I want to write a step with <name>
