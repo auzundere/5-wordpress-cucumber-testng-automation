@@ -6,12 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.asserts.SoftAssert;
 
 import com.wordpress.utilities.Driver;
 
 public class DashboardPage {
  private WebDriver driver;
- 
  public DashboardPage() {
 	 this.driver=Driver.getDriver();
 	 PageFactory.initElements(driver, this);
@@ -69,5 +69,11 @@ public class DashboardPage {
  
  @FindBy(xpath="//ul[@id='wp-admin-bar-user-actions']/li/a")
  public List<WebElement> howdyMenuElements;
+ 
+ public SoftAssert isDisplayedElement(WebElement element) {
+	 SoftAssert softAssert = new SoftAssert();
+	 softAssert.assertTrue(element.isDisplayed(), element.getText() + " was not displayed!");
+	 return softAssert;
+ }
  
 }

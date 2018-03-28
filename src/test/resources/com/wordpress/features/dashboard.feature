@@ -8,6 +8,7 @@ Given I login to the blog
   Scenario: Verifying the Dashbord page and Left Menu Items are displayed
 	Then I verify Dashboard text , At a Glance, Quick Draft, Activity, WordPress Events and News.
 	Then I verify left menu items are displayed
+	Then I will logout
 
  @Dev
   Scenario: Verify all top menu elements 

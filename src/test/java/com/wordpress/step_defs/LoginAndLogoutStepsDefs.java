@@ -12,11 +12,12 @@ public class LoginAndLogoutStepsDefs {
 	@Given("^I login to the blog$")
 	public void i_login_to_the_blog() {
 	   
-	    homePage.loginLink.click();
+//	    homePage.loginLink.click();
 	    BrowserUtils.waitFor(1);
+		homePage.username.clear();
 	    homePage.username.sendKeys(ConfigurationReader.getProperty("username"));
 	    homePage.password.sendKeys(ConfigurationReader.getProperty("password"));
-	   homePage.loginButton.click();
+	    homePage.loginButton.click();
 	}
 	
 	@Then("^I will logout$")
