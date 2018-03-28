@@ -10,7 +10,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		tags="@Dev",
 		features = "src/test/resources/com/wordpress/features/", 
 		glue = "com/wordpress/step_defs",
-		dryRun=false
+		dryRun=true
 )
 public class CukesRunner extends AbstractTestNGCucumberTests {
 
