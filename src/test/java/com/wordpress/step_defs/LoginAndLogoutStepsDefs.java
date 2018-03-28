@@ -22,7 +22,7 @@ public class LoginAndLogoutStepsDefs {
 	
 	@Then("^I will logout$")
 	public void i_will_logout() {
-		BrowserUtils.waitFor(10);
+		BrowserUtils.waitFor(1);
 		homePage.logout();
 	   
 	}

@@ -13,7 +13,7 @@ Given I login to the blog
  @Dev
   Scenario: Verify all top menu elements 
   Then I verify all the links on W menu
-  Then I verify Cybertek's Blog menu items
+  Then I verify Cyberteks Blog menu items
   When I click comments link and goes to comments page
   Then I verify all the link on + New menu
   Then I verify Howdy Menu items

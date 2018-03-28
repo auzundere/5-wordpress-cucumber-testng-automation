@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
+import com.wordpress.utilities.BrowserUtils;
 import com.wordpress.utilities.Driver;
 
 public class DashboardPage {
@@ -31,7 +33,7 @@ public class DashboardPage {
  @FindBy(linkText="Home")
  public WebElement homeLink;
  
- @FindBy(linkText="Updates ")
+ @FindBy(xpath="//a[@href='update-core.php']")
  public WebElement updateLink;
  
  @FindBy(id="collapse-button")
@@ -74,6 +76,12 @@ public class DashboardPage {
 	 SoftAssert softAssert = new SoftAssert();
 	 softAssert.assertTrue(element.isDisplayed(), element.getText() + " was not displayed!");
 	 return softAssert;
+ }
+ 
+ public void hoverOverToElement(WebElement element) {
+	 Actions actions = new Actions(driver);
+	 actions.moveToElement(element).perform();
+	 BrowserUtils.waitFor(1);
  }
  
 }
