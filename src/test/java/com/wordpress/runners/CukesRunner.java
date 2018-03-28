@@ -7,7 +7,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		plugin= {
 				"html:target/cucumber_report"		
 		},
-		tags="@Dev",
+		tags="@posts",
 		features = "src/test/resources/com/wordpress/features/", 
 		glue = "com/wordpress/step_defs",
 		dryRun=false
