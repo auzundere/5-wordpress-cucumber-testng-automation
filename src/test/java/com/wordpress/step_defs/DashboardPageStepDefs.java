@@ -71,5 +71,6 @@ public class DashboardPageStepDefs {
 		}
 		dashboard.isDisplayedElement(dashboard.howdyMenuElements.get(
 				dashboard.howdyMenuElements.size()-1)).assertAll();
+		
 	}
 }
