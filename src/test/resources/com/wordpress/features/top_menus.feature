@@ -2,7 +2,7 @@
 Feature: Cybertek Blog top menu options
 
   Background: 
-    Given I logged to the blog
+    Given I login to the blog
 
   Scenario: Verify W menu options displayed
     When I hover over the W menu
@@ -12,10 +12,12 @@ Feature: Cybertek Blog top menu options
       | Documentation   |
       | Support Forums  |
       | Feedback        |
+      Then I will logout
 
   Scenario: Verify Ceybertek Blog menu options displayed
     When I hover over the Ceybertek Blog menu
     Then I Visit site menu optionshould be visible for Ceybertek
+    Then I will logout
 
   Scenario: Verify +New menu options displayed
     When I hover over the +New menu
@@ -24,6 +26,7 @@ Feature: Cybertek Blog top menu options
       | Media |
       | Page  |
       | User  |
+      Then I will logout
 
   Scenario: Verify Howdy, Tesla menu options displayed
     When I hover over the Howdy, Tesla menu
@@ -31,3 +34,4 @@ Feature: Cybertek Blog top menu options
       | Tesla           |
       | Edit My Profile |
       | Logout          |
+      Then I will logout
