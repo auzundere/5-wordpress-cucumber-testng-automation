@@ -5,9 +5,10 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
 		plugin= {
-				"html:target/cucumber_report"		
-		},
-		tags="@posts",
+				"html:target/cucumber_report",
+				"json:target/cucumber.json"		
+				},
+		tags="@Dev",
 		features = "src/test/resources/com/wordpress/features/", 
 		glue = "com/wordpress/step_defs",
 		dryRun=false
