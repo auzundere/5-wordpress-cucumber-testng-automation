@@ -14,6 +14,7 @@ Feature: Cybertek Blog top menu options
       | Feedback        |
       Then I will logout
 
+
   Scenario: Verify Ceybertek Blog menu options displayed
     When I hover over the Ceybertek Blog menu
     Then I Visit site menu optionshould be visible for Ceybertek
