@@ -4,7 +4,7 @@ Feature: Posts
   Background: 
     Given I login to the blog
 
-  @Devs
+  @Posts
   Scenario: Create a new post
     When I create new post
     #Then verify the post has been created correctly

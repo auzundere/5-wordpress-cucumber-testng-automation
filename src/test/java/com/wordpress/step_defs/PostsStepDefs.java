@@ -28,7 +28,7 @@ public class PostsStepDefs {
 		// Find out how many rows in this sheet
 		int rowsCount = ws.getPhysicalNumberOfRows();
 		Random rand = new Random();
-		int rowNumber = rand.nextInt(rowsCount-1)+1;
+		int rowNumber = rand.nextInt(rowsCount)+1;
 		
 	  //Click Posts on left menu
 	  dashboard.first10ElementsofLeftMenu.get(1).click();
@@ -53,7 +53,7 @@ public class PostsStepDefs {
 	  postsPage.allPicturesMediaLibrary.get(rand.nextInt(postsPage.allPicturesMediaLibrary.size())).click();
 	  //click set Feature Image button
 	  postsPage.setFeatureImageButton.click();
-	  //click Publidh button using Javascript Executer to publish the post...
+	  //click Publish button using Javascript Executer to publish the post...
 	  postsPage.chooseBlindspot(postsPage.publishButton);
 	  //postsPage.publishButton.click();
 	  postsPage.postLink.click();
