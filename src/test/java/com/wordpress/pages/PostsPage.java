@@ -28,6 +28,9 @@ public class PostsPage {
 	@FindBy(xpath="//div[@id='category-all']/ul/li/label/input")
 	public List<WebElement> categoryAll;
 	
+	@FindBy(xpath="//div[@id='category-all']/ul/li/label/input/..")
+	public List<WebElement> categoryAlllabels;
+	
 	@FindBy(xpath="//span[.='Featured Image']")
 	public WebElement featureImageTabTitle;
 	
@@ -48,6 +51,15 @@ public class PostsPage {
 	
 	@FindBy(xpath="//span[@id='editable-post-name']")
 	public WebElement postLink;
+	
+	@FindBy(xpath="//h1")
+	public WebElement titleOfCreatedPost;
+	
+	@FindBy(xpath="//div[@class='post-content']/p")
+	public WebElement contentOfCreatedPost;
+
+	@FindBy(xpath="//p[@class='categories']/a")
+	public WebElement categoryOfCreatedPost;
 	
 	
 	public void chooseBlindspot(WebElement element) {
