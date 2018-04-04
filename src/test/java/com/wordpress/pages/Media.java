@@ -1,5 +1,7 @@
 package com.wordpress.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,15 +23,14 @@ public class Media {
     @FindBy(xpath="//a[@class='wp-first-item current']")
 	public WebElement library;
 
-	@FindBy(xpath="//a[@id='view-switch-list']")
-	public WebElement switchButton;
+	@FindBy(xpath="//a[@id='view-switch-grid']")
+	public WebElement switchGridButton;
 	
 	@FindBy(xpath="//th[@id='title']")
 	public WebElement fileUpDownArrow;
 	
-
-	@FindBy(xpath="//img[@src='http://34.223.219.142:1022/wordpress/wp-content/uploads/2018/04/4c2a6be8-8c55-403f-b052-004c2ee251c1_neyzen.jpg-150x150.jpg']")
-	public WebElement firstImg;
+	@FindBy(xpath="//ul[@class='attachments ui-sortable ui-sortable-disabled']/li")
+	public List<WebElement> allPicturesMediaLibrary;
 	
 	@FindBy(xpath="")
 	public WebElement imgNameVerfy;
