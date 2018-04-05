@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.app</groupId>
+	<groupId>com.wordpress</groupId>
 	<artifactId>5-wordpress-cucumber-testng-automation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
@@ -66,7 +66,8 @@
 				<version>2.21.0</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng_runner.xml</suiteXmlFile>
+					<!-- this line tells maven surefire plugin which file should be executed  -->
+						<suiteXmlFile>${runner}</suiteXmlFile>
 					</suiteXmlFiles>
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
@@ -84,7 +85,10 @@
 						</goals>
 						<configuration>
 							<projectname>TestProject</projectname>
+							<!-- path to the report file will be created -->
 							<outputdirectory>${project.build.directory}/cucumber-html-reports</outputdirectory>
+							<!-- path to cucumber.json file that will create a test report -->
+							<!-- it has to be matched -->
 							<cucumberoutput>${project.build.directory}/target/cucumber.json</cucumberoutput>
 							<enableflashcharts></enableflashcharts>
 						</configuration>

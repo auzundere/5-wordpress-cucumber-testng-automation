@@ -1,3 +1,4 @@
+@smoke
 Feature: Verifying Top and Left Menu Items and Dashboard Page
   
 

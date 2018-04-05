@@ -1,5 +1,7 @@
 package com.wordpress.pages;
 
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -42,6 +44,9 @@ public class DashboardPage {
  @FindBy(id="wp-admin-bar-wp-logo")
  public WebElement wMenu;
  
+ @FindBy(xpath="//h1")
+ public WebElement welcomeToText;
+ 
  @FindBy(xpath="//li[@id='wp-admin-bar-wp-logo']//span[@class='screen-reader-text']")
  public WebElement aboutWordpressLink;
 
@@ -76,6 +81,10 @@ public class DashboardPage {
 	 SoftAssert softAssert = new SoftAssert();
 	 softAssert.assertTrue(element.isDisplayed(), element.getText() + " was not displayed!");
 	 return softAssert;
+ }
+ 
+ public void isAt(String expectedURL) {
+	 assertTrue(expectedURL.equals(driver.getCurrentUrl()),"was not at the expected URL");
  }
  
  public void hoverOverToElement(WebElement element) {
