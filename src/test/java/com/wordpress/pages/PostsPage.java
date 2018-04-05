@@ -1,6 +1,8 @@
 package com.wordpress.pages;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -61,6 +63,42 @@ public class PostsPage {
 	@FindBy(xpath="//p[@class='categories']/a")
 	public WebElement categoryOfCreatedPost;
 	
+	@FindBy(xpath="//div[@class='tablenav top']//span[@class='total-pages']")
+	public List<WebElement> totalPagesOfPosts;
+	
+	@FindBy(id="current-page-selector")
+	public WebElement pageSelectorTextOfPostsPage;
+	
+	@FindBy(xpath="//table[@class='wp-list-table widefat fixed striped posts']/tbody/tr/th/input")
+	public List<WebElement> checkboxesofPageOfPosts;
+	
+	@FindBy(xpath="//select[@id='bulk-action-selector-top']")
+	public WebElement bulkActionSelectorDropDown;
+	
+	@FindBy(id="doaction")
+	public WebElement applyButton;
+	
+	@FindBy(xpath="//p[contains(text(),'posts moved to the Trash.')]")
+	public WebElement deletedPostConfirmationText;//9 posts moved to the Trash.
+	
+	@FindBy(xpath="//span[@class='displaying-num']")
+	public WebElement totalNumberOfPostsText;//24 items
+	
+	
+	
+	public void clickElements(int totalSize, int numberofElementSelect, List<WebElement> element,
+			int startIndex) {
+		Random rand = new Random();
+		List<Integer> num = new ArrayList<>();
+		for (int i = 0; i < totalSize; i++)
+			num.add(i);
+		for (int i = startIndex; i < numberofElementSelect; i++) {
+			int index = rand.nextInt(num.size() - 1);
+			int r = num.get(index) + 1;
+			chooseBlindspot(element.get(r));
+			num.remove(index);
+		}
+	}
 	
 	public void chooseBlindspot(WebElement element) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
