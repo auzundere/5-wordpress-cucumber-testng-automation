@@ -8,7 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 				"html:target/cucumber_report",
 				"json:target/cucumber.json"		
 				},
-		tags="@Posts",
+		tags="@Posts",	
 		features = "src/test/resources/com/wordpress/features/", 
 		glue = "com/wordpress/step_defs",
 		dryRun=false
