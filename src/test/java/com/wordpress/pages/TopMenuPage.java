@@ -24,7 +24,7 @@ public class TopMenuPage {
 	
 	public WebElement admin_color_blue;
 	
-	@FindBy(xpath="//fieldset[@id='color-picker']")   //iterate to select color
+	@FindBy(xpath="//fieldset[@id='color-picker']") 
 	public List<WebElement> colorSheme;
 	
 	public WebElement comment_shortcuts;

@@ -22,33 +22,29 @@ public class TopMenuStepDefs {
 
 	@Then("^I verify title$")
 	public void i_verify_title() {
-	// verify title is Dashboard ‹ Cybertek's Blog! — WordPress
-	assertTrue(Driver.getDriver().getTitle().contains("Dashboard ‹ Cybertek's Blog! — WordPress"));
-    // System.out.println("Cybertek Blog title is verified!!");
+		// verify title is Dashboard ‹ Cybertek's Blog! — WordPress
+		assertTrue(Driver.getDriver().getTitle().contains("Dashboard ‹ Cybertek's Blog! — WordPress"));
+		// System.out.println("Cybertek Blog title is verified!!");
 	}
-	
-	
+
 	@When("^I click Howdy Tesla$")
 	public void i_click_Howdy_Tesla() {
 		dashboard.howdyMenuLink.click();
 		// verify text "Profile" is displayed
 		actual = topmenupage.textProfile.getText();
 		assertEquals(actual, "Profile", "I am not at profile page!!");
-		
+
 	}
 
 	@Then("^I edit profile$")
 	public void i_edit_profile() {
-		Random random=new Random();
+		Random random = new Random();
 		// check keyboard shortcuts
 		topmenupage.comment_shortcuts.click();
 		// check Toolbar
 		topmenupage.toolbar.click();
-
 		// set Admin Color Scheme
-     topmenupage.admin_color_blue.click();
-        //   topmenupage.colorSheme.get(random.nextInt(topmenupage.colorSheme.get(3))).click();
-		// topmenupage.colorSheme.get(3).click(); //select color from iteration
+		topmenupage.admin_color_blue.click();
 
 		// enter info
 		// clear previous name, enter new name
@@ -72,45 +68,36 @@ public class TopMenuStepDefs {
 		assertEquals(actual, "Profile updated.\n" + "Dismiss this notice.", "Profile is not updated!");
 		// click users
 		topmenupage.users.click();
-		//Search name and click search Users
+		// Search name and click search Users
 		topmenupage.userSearchInput.sendKeys("Tesla");
 		topmenupage.searchUsersButton.click();
 		// verify name, last name appear in users page
 		actual = topmenupage.verifyName.getText();
 		assertEquals(actual, "Tesla Team", "Name and last name did not match!!");
-		
+
 	}
 	// Search by given text
-	
+
 	@When("^I click on Cybertek Blog menu$")
 	public void i_click_on_Cybertek_Blog_menu() {
-		//Click on Ceybertek's Blog
+		// Click on Ceybertek's Blog
 		dashboard.BlogLink.click();
-		//verify header is Cybertek's Blog
+		// verify header is Cybertek's Blog
 		assertTrue(topmenupage.header.getText().equalsIgnoreCase("Cybertek's Blog!"));
-
-
 	}
+
 	@Then("^I search for \"([^\"]*)\"$")
 	public void i_search_for(String arg1) {
-	    //dashboard.hoverOverToElement(topmenupage.searchUsersButton);
-//		topmenupage.userSearchInput.click();
-//		topmenupage.userSearchInput.sendKeys("istanbul"+Keys.ENTER);
 		// click on seach button and enter word "Istanbul"
 		topmenupage.search.click();
-		topmenupage.search.sendKeys("istanbul"+Keys.ENTER);
+		topmenupage.search.sendKeys("istanbul" + Keys.ENTER);
 	}
 
 	@Then("^I verify search is displayed$")
 	public void i_verify_search_is_displayed() {
-		//verify search result is displayed
+		// verify search result is displayed
 		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results"));
-		 
-		//assertTrue(topmenupage.Searchedtext.getText().equalsIgnoreCase("istanbul"));
-	    //verify page title contains search term
+		// verify page title contains search term
 		assertTrue(Driver.getDriver().getTitle().contains("istanbul"));
 	}
-	
-	
-	
 }
