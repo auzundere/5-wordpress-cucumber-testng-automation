@@ -12,6 +12,9 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		features = "src/test/resources/com/wordpress/features/", 
 		glue = "com/wordpress/step_defs",
 		dryRun=false
+		
+		
+		
 )
 public class HandanRunner extends AbstractTestNGCucumberTests {
 

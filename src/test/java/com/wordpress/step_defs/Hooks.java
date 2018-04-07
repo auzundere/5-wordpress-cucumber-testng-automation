@@ -24,7 +24,7 @@ public class Hooks {
 	}
 
 	@After
-	public void afterScenario(Scenario scenario) {
+	public void afterScenario(Scenario scenario) throws InterruptedException {
 		//System.out.println("After the Scenario ended");
 		//taking a screenshot
 		if(scenario.isFailed()) {
@@ -33,6 +33,7 @@ public class Hooks {
 			//adding the screenshot to the report
 			scenario.embed(screenshot, "image/png");
 		}
-		//Driver.closeDriver();
+		Thread.sleep(2000);
+		Driver.closeDriver();
 	}
 }
