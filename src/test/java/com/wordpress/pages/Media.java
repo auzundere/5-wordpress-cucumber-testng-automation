@@ -25,7 +25,7 @@ public class Media {
 	public Media() {
 		this.driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
-	}
+	} 
 
 	@FindBy(xpath = "//div[@class='wp-menu-image dashicons-before dashicons-admin-media']") // li[@id='wp-admin-bar-new-media']
 	public WebElement media;
@@ -62,6 +62,9 @@ public class Media {
 	
 	@FindBy(xpath = "//a[@href='media-new.php']")  
 	public WebElement AddNewLeftMenu;
+	
+	@FindBy(xpath = "//button[@id='contextual-help-link']")  
+	public WebElement helpButton;
 	
 	@FindBy(xpath = "//span[@class='displaying-num']")  
 	public WebElement totalItems;
@@ -127,10 +130,9 @@ public class Media {
 		} catch (NoAlertPresentException e) {
 			e.printStackTrace();
 		}
-		// continue testing
-
+	
 	}
-	}
+}
 
 
 

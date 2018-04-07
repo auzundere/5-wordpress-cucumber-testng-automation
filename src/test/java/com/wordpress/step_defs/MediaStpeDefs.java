@@ -1,7 +1,7 @@
 package com.wordpress.step_defs;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -16,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import com.wordpress.pages.DashboardPage;
@@ -34,8 +35,7 @@ public class MediaStpeDefs {
 	PostsPage postsPage = new PostsPage();
 	DashboardPage dashboard = new DashboardPage();
 	String actual;
-
-
+	
 	@When("^I check Library menu$")
 	public void i_check_Library_menu() throws InterruptedException, AWTException {
 		// I click the Media
@@ -62,6 +62,9 @@ public class MediaStpeDefs {
 		media.deleteSelectedButton.click();
 		// accept popUp		
 		media.acceptAlert();
+		//count all picture
+		postsPage.allPicturesMediaLibrary.size();
+		System.out.println(postsPage.allPicturesMediaLibrary.size());
 		
 	}
 	
@@ -73,7 +76,6 @@ public class MediaStpeDefs {
 		//verify search box
 		actual = media.searchBox.getText();
 		assertEquals(actual, "", "It is not correct!");
-		
 		
 	}
 	
@@ -90,7 +92,7 @@ public class MediaStpeDefs {
 		System.out.println(media.totalItems.getText());
 		//click All Media Item and select "Unattached"
 		Select allMediaItem = new Select(media.allMediaItemDropDown);
-		allMediaItem.selectByVisibleText("Unattached");
+		allMediaItem.selectByVisibleText("Unattached"); 
 		//click All Dates and select "April 2018"
 		Select allDates = new Select(media.allDates);
 		allDates.selectByVisibleText("April 2018");
@@ -99,28 +101,26 @@ public class MediaStpeDefs {
 		//check again how many image on the page
 		media.totalItems.getText();
 		System.out.println(media.totalItems.getText());
-		
-		
-		
+	
 		
 	}
 
 	@Then("^verify the Media menu has been worked correctly$")
-	public void verify_the_has_been_worked_correctly(String arg1) {
+	public void verify_the_has_been_worked_correctly() {
 		// verify Media Library
 		actual = media.mediaLibraryVerify.getText();
 		assertEquals(actual, "Media Library", "It is not correct!");
 		//verify total items on the page
 		actual = media.totalItems.getText();
-		assertEquals(actual, "", "Count is wrong!");
+		Assert.assertTrue( true, media.totalItems.getText());              
 		//verify All Media Item
-        actual = media.allMediaItemDropDown.getText();
-        assertEquals(actual, "", "This is not all media!");
+        actual = media.helpButton.getText();
+        assertEquals(actual, "Help", "This is not correct");
 				
 	    
 	}
 	
 	
-	}
+	} 
 
-//
+
