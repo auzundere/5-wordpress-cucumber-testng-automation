@@ -19,6 +19,7 @@ public class Hooks {
 		WebDriver driver = Driver.getDriver();
 		driver.get(ConfigurationReader.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		//driver.manage().window().fullscreen();
 		//System.out.println("Before the Scenario started");
 	}
