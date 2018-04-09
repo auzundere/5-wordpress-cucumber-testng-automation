@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +25,7 @@ public class PostsPage {
 	
 	public WebElement post_title;
 	
-	@FindBy(xpath="//textarea[@id='content']")
+	@FindBy(xpath="//body[@id='tinymce']")
 	public WebElement bodyOfPost;
 	
 	@FindBy(xpath="//div[@id='category-all']/ul/li/label/input")
@@ -84,7 +85,15 @@ public class PostsPage {
 	@FindBy(xpath="//span[@class='displaying-num']")
 	public WebElement totalNumberOfPostsText;//24 items
 	
+	public void switchIframe() {
+		WebElement iframe = driver.findElement(By.xpath("//iframe[@id='content_ifr']"));
+		driver.switchTo().frame(iframe);
+	}
 	
+	public void switchToParent() {
+	
+		driver.switchTo().parentFrame();
+	}
 	
 	public void clickElements(int totalSize, int numberofElementSelect, List<WebElement> element,
 			int startIndex) {

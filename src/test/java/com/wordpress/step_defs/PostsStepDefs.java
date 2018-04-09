@@ -47,7 +47,9 @@ public class PostsStepDefs {
 		postsPage.post_title.sendKeys(expectedTitle);
 		// enter post content getting from Excel (column 1)
 		expectedBody = ws.getRow(rowNumber).getCell(1).toString();
+		postsPage.switchIframe();
 		postsPage.bodyOfPost.sendKeys(expectedBody);
+		postsPage.switchToParent();
 		// Select a category from the list
 		int index = rand.nextInt(postsPage.categoryAll.size());
 		expectedCategory = postsPage.categoryAlllabels.get(index).getText().trim();
