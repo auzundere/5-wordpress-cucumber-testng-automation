@@ -35,6 +35,6 @@ public class Hooks {
 			scenario.embed(screenshot, "image/png");
 		}
 		//Thread.sleep(2000);
-		Driver.closeDriver();
+	//	Driver.closeDriver();
 	}
 }

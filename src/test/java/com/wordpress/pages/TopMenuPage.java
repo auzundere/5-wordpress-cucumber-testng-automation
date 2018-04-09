@@ -50,7 +50,7 @@ public class TopMenuPage {
 	@FindBy(xpath="//a[@href='users.php']")
 	public WebElement users;
 	
-	@FindBy(xpath="//tbody[@id='the-list']/tr[@id='user-3']/td[2]")
+	@FindBy(xpath="//tbody[@id='the-list']/tr[@id='user-2']/td[2]")
 	public WebElement verifyName;
 	
 	@FindBy(id="user-search-input")
