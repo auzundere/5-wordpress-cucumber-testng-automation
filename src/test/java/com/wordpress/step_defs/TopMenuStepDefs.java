@@ -101,6 +101,6 @@ public class TopMenuStepDefs {
 		
 		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results"));
 		// verify page title contains search term
-		assertTrue(Driver.getDriver().getTitle().contains("istanbul"));
+		assertTrue(topmenupage.getTitle().contains("istanbul"));
 	}
 }

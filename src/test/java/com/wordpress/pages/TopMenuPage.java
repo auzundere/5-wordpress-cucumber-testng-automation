@@ -70,4 +70,8 @@ public class TopMenuPage {
 	
 	@FindBy(xpath="//div[@class='page-title']/h4")
 	public WebElement Searchedtext;
+	
+	public String getTitle() {
+		return Driver.getDriver().getTitle();
+	}
 }
