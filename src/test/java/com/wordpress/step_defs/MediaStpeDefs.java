@@ -49,7 +49,7 @@ public class MediaStpeDefs {
 		media.addNew.click();
 		media.selectFilesButton.click();
 		//upload
-		String mediaToUpload = "/Users/handanmelis/Desktop/scd.png";
+		String mediaToUpload = "./src/test/resources/test_files/scd.png";
 		media.uploadMedia(mediaToUpload);		
 		// I click the Media
 		media.media.click();
