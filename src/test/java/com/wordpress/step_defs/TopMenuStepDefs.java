@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 
 import com.wordpress.pages.DashboardPage;
 import com.wordpress.pages.TopMenuPage;
+import com.wordpress.utilities.BrowserUtils;
 import com.wordpress.utilities.Driver;
 
 import cucumber.api.java.en.Then;
@@ -89,6 +90,7 @@ public class TopMenuStepDefs {
 	@Then("^I search for \"([^\"]*)\"$")
 	public void i_search_for(String arg1) {
 		// click on seach button and enter word "Istanbul"
+		BrowserUtils.waitFor(2);
 		topmenupage.search.click();
 		topmenupage.search.sendKeys("istanbul" + Keys.ENTER);
 	}
@@ -96,6 +98,7 @@ public class TopMenuStepDefs {
 	@Then("^I verify search is displayed$")
 	public void i_verify_search_is_displayed() {
 		// verify search result is displayed
+		
 		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results"));
 		// verify page title contains search term
 		assertTrue(Driver.getDriver().getTitle().contains("istanbul"));
