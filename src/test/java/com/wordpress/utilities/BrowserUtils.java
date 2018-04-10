@@ -14,22 +14,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtils {
-	
-	
+
 	
 	public static String generateText() {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < 10) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        String saltStr = salt.toString();
-        return saltStr;
+		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		StringBuilder salt = new StringBuilder();
+		Random rnd = new Random();
+		while (salt.length() < 10) { // length of the random string.
+			int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+			salt.append(SALTCHARS.charAt(index));
+		}
+		String saltStr = salt.toString();
+		return saltStr;
 
-    }
-	
+	}
+
 	public static void hover(WebElement element) {
 		Actions actions = new Actions(Driver.getDriver());
 		actions.moveToElement(element).perform();
@@ -81,17 +80,19 @@ public class BrowserUtils {
 		return wait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 
-//	public static WebElement fluentWait(final WebElement webElement, int timeinsec) {
-//		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
-//				.withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec, TimeUnit.SECONDS)
-//				.ignoring(NoSuchElementException.class);
-//		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
-//			public WebElement apply(WebDriver driver) {
-//				return webElement;
-//			}
-//		});
-//		return element;
-//	}
+	// public static WebElement fluentWait(final WebElement webElement, int
+	// timeinsec) {
+	// FluentWait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
+	// .withTimeout(timeinsec, TimeUnit.SECONDS).pollingEvery(timeinsec,
+	// TimeUnit.SECONDS)
+	// .ignoring(NoSuchElementException.class);
+	// WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+	// public WebElement apply(WebDriver driver) {
+	// return webElement;
+	// }
+	// });
+	// return element;
+	// }
 
 	public static void waitForPageToLoad(long timeOutInSeconds) {
 		ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {

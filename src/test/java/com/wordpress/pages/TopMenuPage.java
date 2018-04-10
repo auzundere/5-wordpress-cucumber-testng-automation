@@ -10,65 +10,66 @@ import org.openqa.selenium.support.PageFactory;
 import com.wordpress.utilities.Driver;
 
 public class TopMenuPage {
-	
+
 	private WebDriver driver;
+
 	public TopMenuPage() {
-		this.driver=Driver.getDriver();
+		this.driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
 	}
-	
-	@FindBy(xpath="//div[@id='profile-page']/h1")
+
+	@FindBy(xpath = "//div[@id='profile-page']/h1")
 	public WebElement textProfile;
-	
+
 	public WebElement admin_color_sunrise;
-	
+
 	public WebElement admin_color_blue;
-	
-	@FindBy(xpath="//fieldset[@id='color-picker']") 
+
+	@FindBy(xpath = "//fieldset[@id='color-picker']")
 	public List<WebElement> colorSheme;
-	
+
 	public WebElement comment_shortcuts;
-	
-	@FindBy(id="admin_bar_front")
+
+	@FindBy(id = "admin_bar_front")
 	public WebElement toolbar;
-	
+
 	public WebElement first_name;
-	
+
 	public WebElement last_name;
-	
+
 	public WebElement nickname;
-	
+
 	public WebElement display_name;
-	
+
 	public WebElement description;
-	
+
 	public WebElement submit;
-	
-	@FindBy(id="message")
+
+	@FindBy(id = "message")
 	public WebElement profileUpdated;
-	
-	@FindBy(xpath="//a[@href='users.php']")
+
+	@FindBy(xpath = "//a[@href='users.php']")
 	public WebElement users;
-	
-	@FindBy(xpath="//tbody[@id='the-list']/tr[@id='user-2']/td[2]")
+
+	@FindBy(xpath = "//tbody[@id='the-list']/tr[@id='user-2']/td[2]")
 	public WebElement verifyName;
-	
-	@FindBy(id="user-search-input")
+
+	@FindBy(id = "user-search-input")
 	public WebElement userSearchInput;
-	
-	@FindBy(id="search-submit")
+
+	@FindBy(id = "search-submit")
 	public WebElement searchUsersButton;
-	
-	@FindBy(xpath="//div[@class='header section-inner']/h1")
+
+	@FindBy(xpath = "//div[@class='header section-inner']/h1")
 	public WebElement header;
-	
-	@FindBy(id="adminbar-search")
+
+	@FindBy(id = "adminbar-search")
 	public WebElement search;
-	
-	@FindBy(xpath="//div[@class='page-title']/p")
+
+	@FindBy(xpath = "//div[@class='page-title']/p")
 	public WebElement textSearchResult;
-	
-	@FindBy(xpath="//div[@class='page-title']/h4")
+
+	@FindBy(xpath = "//div[@class='page-title']/h4")
 	public WebElement Searchedtext;
 	
 	public String getTitle() {

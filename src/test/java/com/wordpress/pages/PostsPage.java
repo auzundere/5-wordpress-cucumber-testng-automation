@@ -28,6 +28,8 @@ public class PostsPage {
 	@FindBy(xpath="//body[@id='tinymce']")
 	public WebElement bodyOfPost;
 	
+	public WebElement content;
+	
 	@FindBy(xpath="//div[@id='category-all']/ul/li/label/input")
 	public List<WebElement> categoryAll;
 	
@@ -79,7 +81,7 @@ public class PostsPage {
 	@FindBy(id="doaction")
 	public WebElement applyButton;
 	
-	@FindBy(xpath="//p[contains(text(),'posts moved to the Trash.')]")
+	@FindBy(xpath="//div[@id='message']/p")
 	public WebElement deletedPostConfirmationText;//9 posts moved to the Trash.
 	
 	@FindBy(xpath="//span[@class='displaying-num']")
@@ -91,7 +93,6 @@ public class PostsPage {
 	}
 	
 	public void switchToParent() {
-	
 		driver.switchTo().parentFrame();
 	}
 	

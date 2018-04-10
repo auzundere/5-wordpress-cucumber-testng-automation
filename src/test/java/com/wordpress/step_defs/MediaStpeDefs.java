@@ -1,7 +1,7 @@
 package com.wordpress.step_defs;
 
 import static org.testng.Assert.assertEquals;
-
+import static org.testng.Assert.assertFalse;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -43,13 +43,14 @@ public class MediaStpeDefs {
 		//click swithListButton
 		media.switchGridButton.click();
 		//count all picture
-		postsPage.allPicturesMediaLibrary.size();
-		System.out.println(postsPage.allPicturesMediaLibrary.size());  
+		int beginningNumberOfMedia = postsPage.allPicturesMediaLibrary.size();
+		System.out.println("Inital number of Media:"  +postsPage.allPicturesMediaLibrary.size());  
 		//click Add New
 		media.addNew.click();
 		media.selectFilesButton.click();
 		//upload
-		String mediaToUpload = "./src/test/resources/test_files/scd.png";
+		//System.out.println(System.getProperty("user.dir"));
+		String mediaToUpload = System.getProperty("user.dir")+"/src/test/resources/test_files/scd.png";
 		media.uploadMedia(mediaToUpload);		
 		// I click the Media
 		media.media.click();
@@ -63,9 +64,10 @@ public class MediaStpeDefs {
 		// accept popUp		
 		media.acceptAlert();
 		//count all picture
-		postsPage.allPicturesMediaLibrary.size();
-		System.out.println(postsPage.allPicturesMediaLibrary.size());
-		
+		int updatedNumberOfMedia = postsPage.allPicturesMediaLibrary.size();
+		System.out.println("Final number of Media:"  +postsPage.allPicturesMediaLibrary.size());
+		assertFalse(updatedNumberOfMedia==beginningNumberOfMedia);
+	
 	}
 	
 	@Then("^verify the Library menu has been worked correctly$")

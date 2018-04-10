@@ -100,7 +100,7 @@ public class Media {
 		robot.keyPress(KeyEvent.VK_TAB);
 		robot.keyRelease(KeyEvent.VK_META);
 		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.delay(500);
+		robot.delay(1000);
 		//After that I hit Command+Shift+G together to open Go To Folder,
 		robot.keyPress(KeyEvent.VK_META);
 		robot.keyPress(KeyEvent.VK_SHIFT);
@@ -115,13 +115,14 @@ public class Media {
 		robot.keyRelease(KeyEvent.VK_META);
 		robot.keyRelease(KeyEvent.VK_V);
 		//BrowserUtils.waitFor(4);
-		//At this point 2 time I am hitting enter to close all dialogs.
+//		//At this point 2 time I am hitting enter to close all dialogs.
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+		BrowserUtils.waitFor(1);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
-
+	
 	
 	public void acceptAlert() {
 		

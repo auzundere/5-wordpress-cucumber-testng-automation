@@ -1,4 +1,4 @@
-@media
+@media1
 Feature: Media
   I want to use this template for my feature file
 

@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
@@ -25,7 +26,7 @@ public class PostsStepDefs {
 	Random rand = new Random();
 	String expectedTitle, expectedBody, expectedCategory;
 	int totalPostsBeforeDeleting, totalPostsAfterDeleting, numberOfPostsToDelete, numberOfDeletedPosts;
-	
+
 	@When("^I create new post$")
 	public void i_create_new_post() throws Exception {
 		// Open File and convert to a stream of data
@@ -47,9 +48,13 @@ public class PostsStepDefs {
 		postsPage.post_title.sendKeys(expectedTitle);
 		// enter post content getting from Excel (column 1)
 		expectedBody = ws.getRow(rowNumber).getCell(1).toString();
-		postsPage.switchIframe();
-		postsPage.bodyOfPost.sendKeys(expectedBody);
-		postsPage.switchToParent();
+		try {
+			postsPage.switchIframe();
+			postsPage.bodyOfPost.sendKeys(expectedBody);
+			postsPage.switchToParent();
+		} catch (NoSuchElementException e) {
+			postsPage.content.sendKeys(expectedBody);
+		}
 		// Select a category from the list
 		int index = rand.nextInt(postsPage.categoryAll.size());
 		expectedCategory = postsPage.categoryAlllabels.get(index).getText().trim();
@@ -87,46 +92,50 @@ public class PostsStepDefs {
 		// verify the category of the new post
 		soft.assertEquals(postsPage.categoryOfCreatedPost.getText(), expectedCategory,
 				"the post's category was not the same with the expected category: " + expectedCategory);
-		
+
 	}
-	
+
 	@When("^I delete a post$")
 	public void i_delete_a_post() {
 		// Click Posts on left menu
 		dashboard.first10ElementsofLeftMenu.get(1).click();
-		//select a page number between 1 and total number of pages of Posts
-		//System.out.println(postsPage.totalPagesOfPosts.size());
+		// select a page number between 1 and total number of pages of Posts
+		// System.out.println(postsPage.totalPagesOfPosts.size());
 		totalPostsBeforeDeleting = Integer.parseInt(postsPage.totalNumberOfPostsText.getText().split(" ")[0]);
-		
-		if(!postsPage.totalPagesOfPosts.get(0).getText().isEmpty()) {
-			int pageAt = rand.nextInt(Integer.parseInt(postsPage.totalPagesOfPosts.get(0).getText()))+1;
+
+		if (!postsPage.totalPagesOfPosts.get(0).getText().isEmpty()) {
+			int pageAt = rand.nextInt(Integer.parseInt(postsPage.totalPagesOfPosts.get(0).getText())) + 1;
 			postsPage.pageSelectorTextOfPostsPage.clear();
-			postsPage.pageSelectorTextOfPostsPage.sendKeys(""+pageAt+Keys.ENTER);
+			postsPage.pageSelectorTextOfPostsPage.sendKeys("" + pageAt + Keys.ENTER);
 			BrowserUtils.waitFor(1);
 		}
-		numberOfPostsToDelete = rand.nextInt(postsPage.checkboxesofPageOfPosts.size()-1)+1;
-		postsPage.clickElements(postsPage.checkboxesofPageOfPosts.size(), numberOfPostsToDelete, 
-				                postsPage.checkboxesofPageOfPosts, 0);
-		
+		numberOfPostsToDelete = rand.nextInt(postsPage.checkboxesofPageOfPosts.size() - 1) + 1;
+		postsPage.clickElements(postsPage.checkboxesofPageOfPosts.size(), numberOfPostsToDelete,
+				postsPage.checkboxesofPageOfPosts, 0);
+
 		Select bulkActions = new Select(postsPage.bulkActionSelectorDropDown);
 		bulkActions.selectByVisibleText("Move to Trash");
 		postsPage.applyButton.click();
-		
+
 	}
 
 	@Then("^verify the post has been deleted$")
 	public void verify_the_post_has_been_deleted() {
-		//'24 items' on the right top side of the page. Get the number of the beginning of the text
+		BrowserUtils.waitFor(2);
+		// '24 items' on the right top side of the page. Get the number of the beginning
+		// of the text
 		totalPostsAfterDeleting = Integer.parseInt(postsPage.totalNumberOfPostsText.getText().split(" ")[0]);
-		//'9 posts moved to the Trash. Undo' on the right top side of the page, get the number of the beginning of the text
+		// '9 posts moved to the Trash. Undo' on the right top side of the page, get the
+		// number of the beginning of the text
 		numberOfDeletedPosts = Integer.parseInt(postsPage.deletedPostConfirmationText.getText().split(" ")[0]);
-		//verify total number of posts at the end of deleting the posts.
-		soft.assertEquals(totalPostsBeforeDeleting - numberOfPostsToDelete, totalPostsAfterDeleting  , 
-				"total deleted number of posts were not the same. Remaining total posts are " + totalPostsAfterDeleting);
-		//Verify total deleted number of posts confirmation number
-		soft.assertEquals(numberOfDeletedPosts, numberOfPostsToDelete , 
+		// verify total number of posts at the end of deleting the posts.
+		soft.assertEquals(totalPostsBeforeDeleting - numberOfPostsToDelete, totalPostsAfterDeleting,
+				"total deleted number of posts were not the same. Remaining total posts are "
+						+ totalPostsAfterDeleting);
+		// Verify total deleted number of posts confirmation number
+		soft.assertEquals(numberOfDeletedPosts, numberOfPostsToDelete,
 				"deleted number of posts were not the same on the confirmation of deleted post text. "
-				+ "Deleted total post found: " + numberOfDeletedPosts);
+						+ "Deleted total post found: " + numberOfDeletedPosts);
 		soft.assertAll();
 	}
 
