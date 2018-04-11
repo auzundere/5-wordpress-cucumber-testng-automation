@@ -14,6 +14,7 @@ import org.testng.asserts.SoftAssert;
 import com.wordpress.pages.DashboardPage;
 import com.wordpress.pages.PostsPage;
 import com.wordpress.utilities.BrowserUtils;
+import com.wordpress.utilities.ConfigurationReader;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -29,7 +30,7 @@ public class PostsStepDefs {
 	@When("^I create new post$")
 	public void i_create_new_post() throws Exception {
 		//Open given Sheet in the given Excel File 
-		Sheet ws = BrowserUtils.openExcelWorksheet(0);
+		Sheet ws = BrowserUtils.openExcelWorksheet(ConfigurationReader.getProperty("excelpostsfile"),0);
 		// Find out how many rows in this sheet
 		int rowsCount = ws.getPhysicalNumberOfRows();
 		int rowNumber = rand.nextInt(rowsCount) + 1;

@@ -30,9 +30,9 @@ public class BrowserUtils {
 	    return elem;
 	}
 	
-	public static Sheet openExcelWorksheet(int SheetNumber) throws Exception {
+	public static Sheet openExcelWorksheet(String filePath, int SheetNumber) throws Exception {
 		// Open File and convert to a stream of data
-				FileInputStream inStream = new FileInputStream(ConfigurationReader.getProperty("excelfile"));
+				FileInputStream inStream = new FileInputStream(filePath);
 				// take the stream of data and use it as Workbook
 				Workbook wb = WorkbookFactory.create(inStream);
 				// get the first worksheet from the workbook

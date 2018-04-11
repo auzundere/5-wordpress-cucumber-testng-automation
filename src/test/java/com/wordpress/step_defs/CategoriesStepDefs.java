@@ -16,6 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.wordpress.pages.CategoriesPage;
 import com.wordpress.pages.DashboardPage;
 import com.wordpress.utilities.BrowserUtils;
+import com.wordpress.utilities.ConfigurationReader;
 import com.wordpress.utilities.Driver;
 
 import cucumber.api.PendingException;
@@ -45,7 +46,7 @@ public class CategoriesStepDefs {
 		categoriesPage.screenOptionsApply.click();
 		BrowserUtils.waitForInMilliSeconds(400);
 		// Open given Sheet in the given Excel File
-		Sheet ws = BrowserUtils.openExcelWorksheet(1);
+		Sheet ws = BrowserUtils.openExcelWorksheet(ConfigurationReader.getProperty("excelcategoriesfile"),0);
 		// Find out how many rows in this sheet
 		int rowsCount = ws.getPhysicalNumberOfRows();
 		int rowNumber = rand.nextInt(rowsCount) + 1;
