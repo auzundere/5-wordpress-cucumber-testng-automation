@@ -19,7 +19,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class PostsStepDefs {
-	String filePath = "./src/test/resources/test_files/postList.xlsx";
 	DashboardPage dashboard = new DashboardPage();
 	PostsPage postsPage = new PostsPage();
 	SoftAssert soft = new SoftAssert();
@@ -29,12 +28,8 @@ public class PostsStepDefs {
 
 	@When("^I create new post$")
 	public void i_create_new_post() throws Exception {
-		// Open File and convert to a stream of data
-		FileInputStream inStream = new FileInputStream(filePath);
-		// take the stream of data and use it as Workbook
-		Workbook wb = WorkbookFactory.create(inStream);
-		// get the first worksheet from the workbook
-		Sheet ws = wb.getSheetAt(0);
+		//Open given Sheet in the given Excel File 
+		Sheet ws = BrowserUtils.openExcelWorksheet(0);
 		// Find out how many rows in this sheet
 		int rowsCount = ws.getPhysicalNumberOfRows();
 		int rowNumber = rand.nextInt(rowsCount) + 1;

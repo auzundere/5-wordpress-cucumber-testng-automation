@@ -11,7 +11,7 @@ Feature: Posts
    	Then I will logout
    	
    	@Posts
-   	Scenario: Delete a post
+   	Scenario: Delete posts
     When I delete a post
    	Then verify the post has been deleted
     Then I will logout

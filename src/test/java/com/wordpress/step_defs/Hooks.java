@@ -34,7 +34,6 @@ public class Hooks {
 			//adding the screenshot to the report
 			scenario.embed(screenshot, "image/png");
 		}
-		//Thread.sleep(2000);
 		Driver.closeDriver();
 	}
 }

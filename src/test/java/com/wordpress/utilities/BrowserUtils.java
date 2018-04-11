@@ -1,9 +1,16 @@
 package com.wordpress.utilities;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +21,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtils {
-
+	public static WebElement highlightElement(WebElement elem) {
+		
+	    // draw a border around the found element
+	    if (Driver.getDriver() instanceof JavascriptExecutor) {
+	        ((JavascriptExecutor)Driver.getDriver()).executeScript("arguments[0].style.border='3px solid red'", elem);
+	    }
+	    return elem;
+	}
+	
+	public static Sheet openExcelWorksheet(int SheetNumber) throws Exception {
+		// Open File and convert to a stream of data
+				FileInputStream inStream = new FileInputStream(ConfigurationReader.getProperty("excelfile"));
+				// take the stream of data and use it as Workbook
+				Workbook wb = WorkbookFactory.create(inStream);
+				// get the first worksheet from the workbook
+				Sheet ws = wb.getSheetAt(SheetNumber);
+		return ws;
+	}
 	
 	public static String generateText() {
 		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -118,6 +142,13 @@ public class BrowserUtils {
 		}
 	}
 
+	public static void waitForInMilliSeconds(int milliSecs) {
+		try {
+			Thread.sleep(milliSecs);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void switchToWindow(String targetTitle) {
 		String origin = Driver.getDriver().getWindowHandle();
 		for (String handle : Driver.getDriver().getWindowHandles()) {
