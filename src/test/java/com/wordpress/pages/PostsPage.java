@@ -20,6 +20,7 @@ public class PostsPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	
 	@FindBy(xpath="//h1[@class='wp-heading-inline']/../a")
 	public WebElement addNewButton;
 	
