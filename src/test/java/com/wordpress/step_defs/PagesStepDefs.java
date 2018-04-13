@@ -22,6 +22,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -52,6 +54,7 @@ public class PagesStepDefs {
 	PagePage ppage = new PagePage();
 	PagePageS ppages = new PagePageS();
 	String filePath = "./src/test/resources/test_files/pageList.xlsx";
+	String filePathWord = "./src/test/resources/test_files/Hagia_Sophia.docx";
 	Workbook workbook;
 	Sheet worksheet;
 	FileInputStream inStream;
@@ -64,10 +67,10 @@ public class PagesStepDefs {
 	public void i_create_new_page() throws Exception {
 
 		// --->>> INFO --->>>
-		js.executeScript("alert('We are going to create new Page with Gallery of Images');");
+		js.executeScript("alert('We are going to create new Page ');");
 
 		Alert alert = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(3);
+		BrowserUtils.waitFor(2);
 		alert.accept();
 		// --->>> --->>>
 
@@ -87,7 +90,7 @@ public class PagesStepDefs {
 		// --->>> INFO --->>>
 		js.executeScript("alert('The buttons-name on this page are compared to the names list in Exsel file.');");
 		Alert alert1 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(4);
+		BrowserUtils.waitFor(2);
 		alert1.accept();
 		// --->>> --->>>
 
@@ -136,18 +139,15 @@ public class PagesStepDefs {
 		for (WebElement we : ppage.buttonsWidjet) {
 			buttons_names_onPage.add(we.getText().toString());
 		}
-
 		// button names from Excel
 		ArrayList<String> buttonsNameWidjet = new ArrayList<>();
 		Row myRow = worksheet.getRow(2);
 		for (int i = 1; i < myRow.getPhysicalNumberOfCells(); i++) {
 			buttonsNameWidjet.add(myRow.getCell(i).getStringCellValue());
 		}
-
 		// close Excel file
 		workbook.close();
 		inStream.close();
-
 		// verify that all buttons inWidjet are displayed
 		softAssert.assertTrue(buttonsNameWidjet.containsAll(buttonsNameWidjet), "*** widjet buttons failed");
 
@@ -176,7 +176,6 @@ public class PagesStepDefs {
 		js.executeScript("alert('Names of Widjets on this Page will be written in new created Exsel file.');");
 
 		Alert alert1 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(4);
 		alert1.accept();
 		// --->>> --->>>
 
@@ -196,7 +195,6 @@ public class PagesStepDefs {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		// write widget names to Excel file "widjetNames.xlsx"
 		XSSFWorkbook workbookNew = new XSSFWorkbook();
 		XSSFSheet sheet = workbookNew.createSheet("widjet names");
@@ -311,11 +309,11 @@ public class PagesStepDefs {
 
 		dashboard.first10ElementsofLeftMenu.get(3).click();
 
-		// search the page "Hagia Sophiya"
-		ppages.input_searchPages.sendKeys("Hagia");
+		// search the page pageName ("Hagia Sophiya")
+		ppages.input_searchPages.sendKeys(pageName);
 		ppages.input_searchSubmit.click();
 
-		BrowserUtils.waitForPageToLoad(2);
+		BrowserUtils.waitForPageToLoad(1);
 		// create array of search results
 		System.out.println("size: " + ppages.searchResults.size());
 		List<WebElement> searchPages = new ArrayList<>();
@@ -326,7 +324,7 @@ public class PagesStepDefs {
 
 				ppages.checkBoxes.get(i).click();
 				// we.click();
-				//break;
+				// break;
 			}
 		}
 		System.out.println("i= " + i);
@@ -342,7 +340,7 @@ public class PagesStepDefs {
 		// --->>> INFO --->>>
 		js.executeScript("alert('This script checks the EDIT functionality for Page');");
 		Alert alert1 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(4);
+		BrowserUtils.waitFor(2);
 		alert1.accept();
 		// --->>> --->>>
 		// select action: Edit page
@@ -374,7 +372,7 @@ public class PagesStepDefs {
 			i++;
 			if (we.getText().equals(pageName)) {
 				// we.click();
-				//break;
+				// break;
 			}
 		}
 		System.out.println("i= " + i);
@@ -386,7 +384,7 @@ public class PagesStepDefs {
 		// --->>> INFO --->>>
 		js.executeScript("alert('Created Page was edited.');");
 		Alert alert2 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(4);
+		BrowserUtils.waitFor(2);
 		alert2.accept();
 		// --->>> --->>>
 
@@ -399,15 +397,16 @@ public class PagesStepDefs {
 		// --->>> INFO --->>>
 		js.executeScript("alert('Check the DELETE Page functionality');");
 		Alert alert1 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(4);
+		BrowserUtils.waitFor(2);
 		alert1.accept();
 		// --->>> --->>>
 
 		Select selectAction = new Select(ppages.selectAction);
 
 		selectAction.selectByVisibleText("Move to Trash");
+		BrowserUtils.waitFor(1);
 		ppages.button_Apply.click();
-		BrowserUtils.waitFor(2);
+		BrowserUtils.waitFor(1);
 	}
 
 	@Then("^I verify that page \"([^\"]*)\" is deleted$")
@@ -421,18 +420,161 @@ public class PagesStepDefs {
 			}
 		}
 
-		
-		
-		
-		
-		
 		Assert.assertTrue((isHere == false), "page " + pageName + " still on the list of search reslt");
 		// --->>> INFO --->>>
 		js.executeScript("alert('Created Page was deleted.');");
 		Alert alert2 = Driver.getDriver().switchTo().alert();
-		BrowserUtils.waitFor(3);
+		BrowserUtils.waitFor(2);
 		alert2.accept();
 		// --->>> --->>>
+
+	}
+
+	@Then("^I create Page with Image and text$")
+	public void i_create_Page_with_Image_and_text() throws Exception, IOException {
+		// add the title
+		ppage.input_Title.clear();
+		ppage.input_Title.sendKeys("Page with Image and Text");
+		BrowserUtils.waitFor(1);
+		// create new row with 2 widjet-container for the new Page
+		ppage.buttonsWidjet.get(1).click();
+		// set the row
+		ppage.numOfRowsWidget.clear();
+		ppage.numOfRowsWidget.sendKeys("2");
+
+		Select ratio = new Select(ppage.selectRatioWidjet);
+		ratio.selectByVisibleText("Golden (0.618)");
+
+		Select ratioDirection = new Select(ppage.selectRatioDirectionWidjet);
+		ratioDirection.selectByVisibleText("Right to Left");
+		BrowserUtils.waitFor(1);
+
+		ppage.insert.click();
+
+		// ppage.container_WidjetS.get(0).click();
+
+		// choose the widget "image: for the first container"
+		ppage.buttonsWidjet.get(0).click();
+
+		for (WebElement widjet : ppage.widjets) {
+			if (widjet.getText().equals("Image")) {
+				widjet.click();
+				break;
+			}
+		}
+
+		Actions actions = new Actions(Driver.getDriver());
+		actions.moveToElement(ppage.container_Widjet);
+		actions.contextClick(ppage.container_WidjetS.get(1)).build().perform(); /* this will perform right click */
+		BrowserUtils.waitFor(2);
+		ppage.input_Widjet_Name.sendKeys("Text");
+		// ppage.edit_Widjet.click();
+		BrowserUtils.waitForClickablility(ppage.find_Widjet_ByName, 2);
+
+		Actions actions1 = new Actions(Driver.getDriver());
+		actions1.moveToElement(ppage.find_Widjet_ByName);
+		BrowserUtils.waitFor(1);
+		ppage.find_Widjet_ByName.click();
+		// add Image
+
+		for (WebElement we : ppage.container_WidjetS) {
+			System.out.println("*****" + we.getText());
+		}
+
+		Actions actions2 = new Actions(Driver.getDriver());
+		actions2.moveToElement(ppage.container_WidjetS.get(0));
+		actions.contextClick(ppage.container_Widjet).build().perform(); /* this will perform right click */
+		BrowserUtils.waitFor(1);
+		ppage.edit_Widjet.click();
+		ppage.button_AddImage.click();
+		ppage.input_SearchMedia.sendKeys("Sophia_Main");
+
+		BrowserUtils.waitFor(2);
+
+		for (WebElement we : ppage.imagesForGAllery) {
+
+			if (we.getAttribute("aria-label").toString().equalsIgnoreCase("Sophia_Main")) {
+				System.out.println(we.getAttribute("aria-label").toString());
+				we.click();
+			}
+		}
+
+		BrowserUtils.waitFor(1);
+		ppage.button_Add_ToWidjet.click();
+		BrowserUtils.waitFor(1);
+		ppage.button_Done.click();
+
+		// add text to Widget 2
+		Actions actions3 = new Actions(Driver.getDriver());
+		actions3.moveToElement(ppage.container_WidjetS.get(1));
+		actions3.click(ppage.container_WidjetS.get(1));
+		actions3.contextClick(ppage.container_Widjet).build().perform(); /* this will perform right click */
+		BrowserUtils.waitFor(1);
+		// get text from Word.file
+		XWPFDocument docx = new XWPFDocument(new FileInputStream(filePathWord));
+		XWPFWordExtractor we = new XWPFWordExtractor(docx);
+		String text = we.getText();
+
+		// --->>> INFO --->>>
+		js.executeScript("alert('Text for this page is imported from the MS Word file.');");
+
+		Alert alert1 = Driver.getDriver().switchTo().alert();
+		BrowserUtils.waitFor(2);
+		alert1.accept();
+		// --->>> --->>>
+
+		// I-FRAME. edit the text
+		WebElement iFrame = Driver.getDriver().findElement(By.tagName("iframe"));
+		Driver.getDriver().switchTo().frame(iFrame);
+		Driver.getDriver().findElement(By.xpath("//body[@id='tinymce']")).sendKeys(text);
+
+		BrowserUtils.waitFor(3);
+		Driver.getDriver().switchTo().parentFrame();
+
+		// click Done on Text page
+		ppage.button_Done_forText.click();
+
+	}
+
+	@Then("^verify the Page with Image and text has been created correctly$")
+	public void verify_the_Page_with_Image_and_text_has_been_created_correctly() {
+		// save current Window Handle
+		String handle = Driver.getDriver().getWindowHandle();
+		// save Draft and publish
+		ppage.button_SaveDraft.click();
+		ppage.button_PostPreview.click();
+
+		BrowserUtils.waitFor(2);
+
+		// Find the set of Window Handle
+		Set<String> windowHandles = Driver.getDriver().getWindowHandles();
+
+		String newWindowHandle = "";
+		for (String string : windowHandles) {
+			if (!string.equals(handle)) {
+				newWindowHandle = string;
+			}
+		}
+		Driver.getDriver().switchTo().window(newWindowHandle);
+		// Actions actions = new Actions (Driver.getDriver());
+		// actions.moveToElement(ppage.wwwTitle).click().sendKeys(Keys.PAGE_DOWN).perform();
+
+		Assert.assertEquals(ppage.new_Page_Name.getText().toLowerCase(), "page with image and text",
+				"new page does not created");
+		String imageNameIn = ppage.image_onNewPage.getAttribute("src").toString().toLowerCase();
+		System.out.println("imageNameIn " + imageNameIn);
+		Assert.assertTrue(imageNameIn.contains("sophia_main"), "Image does not loaded");
+
+		BrowserUtils.waitFor(3);
+
+		Driver.getDriver().close();
+		Driver.getDriver().switchTo().window(handle);
+
+		ppage.button_SaveDraft.click();
+
+	}
+
+	public void getTextFromWordFile() {
 
 	}
 
