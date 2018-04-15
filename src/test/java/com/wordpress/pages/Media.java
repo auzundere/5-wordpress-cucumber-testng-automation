@@ -127,10 +127,10 @@ public class Media {
 			// When the dialog window opens, the selenium looses the control. to take the
 			// control back
 			// I am hitting Command + TAB keys. It brings the control to selenium.
-			robot.keyPress(KeyEvent.VK_ALT);
-			robot.keyPress(KeyEvent.VK_TAB);
-			robot.keyRelease(KeyEvent.VK_ALT);
-			robot.keyRelease(KeyEvent.VK_TAB);
+//			robot.keyPress(KeyEvent.VK_ALT);
+//			robot.keyPress(KeyEvent.VK_TAB);
+//			robot.keyRelease(KeyEvent.VK_ALT);
+//			robot.keyRelease(KeyEvent.VK_TAB);
 			robot.delay(1000);
 			// At this point I am pasting what I have in my clipboard.
 			// That is the value of fileName argument "/Users/handanmelis/Desktop/scd.png"
