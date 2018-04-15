@@ -25,7 +25,7 @@ public class Media {
 	public Media() {
 		this.driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
-	} 
+	}
 
 	@FindBy(xpath = "//div[@class='wp-menu-image dashicons-before dashicons-admin-media']") // li[@id='wp-admin-bar-new-media']
 	public WebElement media;
@@ -38,40 +38,40 @@ public class Media {
 
 	@FindBy(xpath = "//a[@class='view-list']")
 	public WebElement switchListButton;
-	
-	@FindBy(xpath = "//th[@id='title']")   
+
+	@FindBy(xpath = "//th[@id='title']")
 	public WebElement fileUpDownArrow;
-	
-	@FindBy(xpath = "//input[@placeholder='Search media items...']")  
+
+	@FindBy(xpath = "//input[@placeholder='Search media items...']")
 	public WebElement searchBox;
 
 	@FindBy(xpath = "//button[@class='button media-button  select-mode-toggle-button']")
 	public WebElement bulkSelectButton;
 
-	@FindBy(xpath = "//div[.='Media']")  
+	@FindBy(xpath = "//div[.='Media']")
 	public WebElement mediaLink;
-	
-	@FindBy(xpath = "//select[@id='attachment-filter']")  
+
+	@FindBy(xpath = "//select[@id='attachment-filter']")
 	public WebElement allMediaItemDropDown;
-	
-	@FindBy(xpath = "//select[@id='filter-by-date']")  
+
+	@FindBy(xpath = "//select[@id='filter-by-date']")
 	public WebElement allDates;
-	
-	@FindBy(xpath = "//input[@id='post-query-submit']")  
+
+	@FindBy(xpath = "//input[@id='post-query-submit']")
 	public WebElement filterButton;
-	
-	@FindBy(xpath = "//a[@href='media-new.php']")  
+
+	@FindBy(xpath = "//a[@href='media-new.php']")
 	public WebElement AddNewLeftMenu;
-	
-	@FindBy(xpath = "//button[@id='contextual-help-link']")  
+
+	@FindBy(xpath = "//button[@id='contextual-help-link']")
 	public WebElement helpButton;
-	
-	@FindBy(xpath = "//span[@class='displaying-num']")  
+
+	@FindBy(xpath = "//span[@class='displaying-num']")
 	public WebElement totalItems;
 
-	@FindBy(xpath = "//a[@class='page-title-action aria-button-if-js']")  
+	@FindBy(xpath = "//a[@class='page-title-action aria-button-if-js']")
 	public WebElement addNew;
-	
+
 	@FindBy(xpath = "//h1[@class='wp-heading-inline']")
 	public WebElement mediaLibraryVerify;
 
@@ -83,60 +83,75 @@ public class Media {
 
 	@FindBy(xpath = " //div[@class='attachment-preview js--select-attachment type-image subtype-png landscape']")
 	public WebElement selectFirstPhotoForDelete;
-	
-	//ul[@class='attachments ui-sortable ui-sortable-disabled']/li[@data-id='951']
-	//ul[@id='__attachments-view-42']//li[@data-id='951']
+
+	// ul[@class='attachments ui-sortable ui-sortable-disabled']/li[@data-id='951']
+	// ul[@id='__attachments-view-42']//li[@data-id='951']
 
 	public void uploadMedia(String fileName) throws AWTException {
-		//this 3 lines take my file name from start to end and copy to mac clipboard
+		// this 3 lines take my file name from start to end and copy to mac clipboard
 		File file = new File(fileName);
 		StringSelection stringSelection = new StringSelection(file.getAbsolutePath());
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-		
+
 		Robot robot = new Robot();
-		//When the dialog window opens, the selenium looses the control. to take the control back
-		// I am hitting Command + TAB keys. It brings the control to selenium.
-		robot.keyPress(KeyEvent.VK_META);
-		robot.keyPress(KeyEvent.VK_TAB);
-		robot.keyRelease(KeyEvent.VK_META);
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.delay(1000);
-		//After that I hit Command+Shift+G together to open Go To Folder,
-		robot.keyPress(KeyEvent.VK_META);
-		robot.keyPress(KeyEvent.VK_SHIFT);
-		robot.keyPress(KeyEvent.VK_G);
-		robot.keyRelease(KeyEvent.VK_META);
-		robot.keyRelease(KeyEvent.VK_SHIFT);
-		robot.keyRelease(KeyEvent.VK_G);
-		//At this point I am pasting what I have in my clipboard. 
-		//That is the value of fileName argument "/Users/handanmelis/Desktop/scd.png"
-		robot.keyPress(KeyEvent.VK_META);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_META);
-		robot.keyRelease(KeyEvent.VK_V);
-		//BrowserUtils.waitFor(4);
-//		//At this point 2 time I am hitting enter to close all dialogs.
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		BrowserUtils.waitFor(1);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		if (System.getProperty("os.name").startsWith("Mac")) {
+			// When the dialog window opens, the selenium looses the control. to take the
+			// control back
+			// I am hitting Command + TAB keys. It brings the control to selenium.
+			robot.keyPress(KeyEvent.VK_META);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_META);
+			robot.keyRelease(KeyEvent.VK_TAB);
+			robot.delay(1000);
+			// After that I hit Command+Shift+G together to open Go To Folder,
+			robot.keyPress(KeyEvent.VK_META);
+			robot.keyPress(KeyEvent.VK_SHIFT);
+			robot.keyPress(KeyEvent.VK_G);
+			robot.keyRelease(KeyEvent.VK_META);
+			robot.keyRelease(KeyEvent.VK_SHIFT);
+			robot.keyRelease(KeyEvent.VK_G);
+			// At this point I am pasting what I have in my clipboard.
+			// That is the value of fileName argument "/Users/handanmelis/Desktop/scd.png"
+			robot.keyPress(KeyEvent.VK_META);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_META);
+			robot.keyRelease(KeyEvent.VK_V);
+			// BrowserUtils.waitFor(4);
+			// //At this point 2 time I am hitting enter to close all dialogs.
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			BrowserUtils.waitFor(1);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+		} else if (System.getProperty("os.name").startsWith("Windows")) {
+			// When the dialog window opens, the selenium looses the control. to take the
+			// control back
+			// I am hitting Command + TAB keys. It brings the control to selenium.
+			robot.keyPress(KeyEvent.VK_ALT);
+			robot.keyPress(KeyEvent.VK_TAB);
+			robot.keyRelease(KeyEvent.VK_ALT);
+			robot.keyRelease(KeyEvent.VK_TAB);
+			robot.delay(1000);
+			// At this point I am pasting what I have in my clipboard.
+			// That is the value of fileName argument "/Users/handanmelis/Desktop/scd.png"
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			robot.keyRelease(KeyEvent.VK_V);
+			// //At this point 1 time I am hitting enter to close all dialogs.
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			//BrowserUtils.waitFor(1);
+		}
 	}
-	
-	
+
 	public void acceptAlert() {
-		
+
 		try {
 			driver.switchTo().alert().accept();
 		} catch (NoAlertPresentException e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 }
-
-
-
-
-
-
