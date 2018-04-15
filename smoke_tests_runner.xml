@@ -2,7 +2,7 @@
 <suite name="WordPress Smoke Automation" verbose="2">
 	<test name="Smoke tests">
 		<classes>
-			<class name="com.wordpress.runners.HandanRunner"></class>
+			<class name="com.wordpress.runners.SmokeTestsRunner"></class>
 		</classes>
 	</test>
 </suite>
