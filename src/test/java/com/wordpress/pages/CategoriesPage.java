@@ -25,7 +25,6 @@ public class CategoriesPage {
 	@FindBy(id="screen-options-apply")
 	public WebElement screenOptionsApply;
 	
-	
 	@FindBy(xpath="//table[@class='wp-list-table widefat fixed striped tags']/tbody/tr/th/input")
 	public List<WebElement> categoryCheckboxes;
 	
