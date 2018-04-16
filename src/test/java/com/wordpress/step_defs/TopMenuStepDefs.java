@@ -99,7 +99,7 @@ public class TopMenuStepDefs {
 	public void i_verify_search_is_displayed() {
 		// verify search result is displayed
 		
-		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results for: new"));
+		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results"));
 		// verify page title contains search term
 		assertTrue(topmenupage.getTitle().contains("new"));
 	}
