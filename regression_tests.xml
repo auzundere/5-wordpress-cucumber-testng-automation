@@ -2,7 +2,7 @@
 <suite name="WordPress Regresssion Automation" verbose="2">
 	<test name="Regresssion tests">
 		<classes>
-			<class name="com.wordpress.runners.SmokeTestsRunner"></class>
+			<class name="com.wordpress.runners.RegressionRunner"></class>
 		</classes>
 	</test>
 </suite>
