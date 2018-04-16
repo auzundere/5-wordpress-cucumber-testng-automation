@@ -90,7 +90,7 @@ public class TopMenuStepDefs {
 	@Then("^I search for \"([^\"]*)\"$")
 	public void i_search_for(String arg1) {
 		// click on seach button and enter word "Istanbul"
-		BrowserUtils.waitFor(2);
+		BrowserUtils.waitFor(3);
 		topmenupage.search.click();
 		topmenupage.search.sendKeys("istanbul" + Keys.ENTER);
 	}

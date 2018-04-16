@@ -10,6 +10,7 @@ Feature: Cybertek Blog top menu options
     Then I edit profile
     Then I verify profile is updated
     Then I will logout
+   
 
    Scenario: Search by given text
    When I click on Cybertek Blog menu
