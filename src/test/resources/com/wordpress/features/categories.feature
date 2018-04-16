@@ -10,8 +10,8 @@ Feature: Categories
     Then verify the categories have been created
     Then I will logout
 
-  #@categories
+  @categories
   Scenario: Delete categories
     When I delete categories
     Then verify the categories have been deleted
-    #Then I will logout
+    Then I will logout

@@ -1,13 +1,10 @@
 package com.wordpress.utilities;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -22,24 +19,28 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtils {
 	public static WebElement highlightElement(WebElement elem) {
-		
-	    // draw a border around the found element
-	    if (Driver.getDriver() instanceof JavascriptExecutor) {
-	        ((JavascriptExecutor)Driver.getDriver()).executeScript("arguments[0].style.border='3px solid red'", elem);
-	    }
-	    return elem;
+
+		// draw a border around the found element
+		if (Driver.getDriver() instanceof JavascriptExecutor) {
+			((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].style.border='3px solid red'", elem);
+		}
+		return elem;
 	}
-	
+
+	public static void scrollDown(WebElement element) {
+		((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView();", element);
+	}
+
 	public static Sheet openExcelWorksheet(String filePath, int SheetNumber) throws Exception {
 		// Open File and convert to a stream of data
-				FileInputStream inStream = new FileInputStream(filePath);
-				// take the stream of data and use it as Workbook
-				Workbook wb = WorkbookFactory.create(inStream);
-				// get the first worksheet from the workbook
-				Sheet ws = wb.getSheetAt(SheetNumber);
+		FileInputStream inStream = new FileInputStream(filePath);
+		// take the stream of data and use it as Workbook
+		Workbook wb = WorkbookFactory.create(inStream);
+		// get the first worksheet from the workbook
+		Sheet ws = wb.getSheetAt(SheetNumber);
 		return ws;
 	}
-	
+
 	public static String generateText() {
 		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		StringBuilder salt = new StringBuilder();
@@ -57,7 +58,11 @@ public class BrowserUtils {
 		Actions actions = new Actions(Driver.getDriver());
 		actions.moveToElement(element).perform();
 	}
-
+	
+	public static int generateRandomNumber(int startNum, int endNum) {
+		Random r = new Random();
+		return r.nextInt(endNum- startNum+1) +startNum;
+	}
 	/**
 	 * * return a list of string from a list of elements * ignores any element with
 	 * no text * @param list * @return
@@ -149,6 +154,7 @@ public class BrowserUtils {
 			e.printStackTrace();
 		}
 	}
+
 	public static void switchToWindow(String targetTitle) {
 		String origin = Driver.getDriver().getWindowHandle();
 		for (String handle : Driver.getDriver().getWindowHandles()) {

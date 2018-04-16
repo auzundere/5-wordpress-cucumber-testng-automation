@@ -49,8 +49,14 @@ public class CategoriesPage {
 	@FindBy(id="submit")
 	public WebElement addNewCategoryButton;
 	
+	@FindBy(xpath="//table[@class='wp-list-table widefat fixed striped tags']/tbody//th/input")
+	public List<WebElement> categoriesCheckboxes;
+	
 	@FindBy(id="bulk-action-selector-top")
 	public WebElement bulkActionDropDown;
+	
+	@FindBy(xpath="//span[@class='displaying-num']")
+	public WebElement itemCountText;
 	
 	@FindBy(id="doaction")
 	public WebElement applyButton;
@@ -58,5 +64,6 @@ public class CategoriesPage {
 	public void refreshThePage() {
 		driver.navigate().refresh();
 	}
+	
 	
 }

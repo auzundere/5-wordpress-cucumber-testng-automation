@@ -1,5 +1,6 @@
 package com.wordpress.step_defs;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -12,26 +13,33 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import com.wordpress.pages.CategoriesPage;
 import com.wordpress.pages.DashboardPage;
+import com.wordpress.pages.PostsPage;
 import com.wordpress.utilities.BrowserUtils;
 import com.wordpress.utilities.ConfigurationReader;
 import com.wordpress.utilities.Driver;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CategoriesStepDefs {
 	CategoriesPage categoriesPage = new CategoriesPage();
 	DashboardPage dashboard = new DashboardPage();
+	PostsPage postsPage = new PostsPage();
+
 	Random rand = new Random();
 	String categoryName;
 	String categorySlug;
 	boolean creationSuccessfull;
 	WebElement catName;
 	WebElement catSlug;
+	int numberOfItemsBeforeDeletion;
+	int numberOfItemsAfterDeletion;
+	int numberOfCategoriesToDelete;
+
 	Actions actions = new Actions(Driver.getDriver());
 	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
@@ -46,7 +54,7 @@ public class CategoriesStepDefs {
 		categoriesPage.screenOptionsApply.click();
 		BrowserUtils.waitForInMilliSeconds(400);
 		// Open given Sheet in the given Excel File
-		Sheet ws = BrowserUtils.openExcelWorksheet(ConfigurationReader.getProperty("excelcategoriesfile"),0);
+		Sheet ws = BrowserUtils.openExcelWorksheet(ConfigurationReader.getProperty("excelcategoriesfile"), 0);
 		// Find out how many rows in this sheet
 		int rowsCount = ws.getPhysicalNumberOfRows();
 		int rowNumber = rand.nextInt(rowsCount) + 1;
@@ -98,13 +106,28 @@ public class CategoriesStepDefs {
 
 	@When("^I delete categories$")
 	public void i_delete_categories() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		BrowserUtils.hover(categoriesPage.postsMenu);
+		categoriesPage.categoriesMenu.click();
+		categoriesPage.showSettingsLink.click();
+		BrowserUtils.waitForInMilliSeconds(150);
+		categoriesPage.edit_category_per_page.clear();
+		categoriesPage.edit_category_per_page.sendKeys("999");
+		categoriesPage.screenOptionsApply.click();
+		BrowserUtils.waitForInMilliSeconds(400);
+		// define how many categories will be deleted
+		numberOfCategoriesToDelete = BrowserUtils.generateRandomNumber(0,
+				categoriesPage.categoriesCheckboxes.size() - 1);
+		numberOfItemsBeforeDeletion = Integer.parseInt(categoriesPage.itemCountText.getText().split(" ")[0]);
+		postsPage.clickElements(categoriesPage.categoriesCheckboxes.size(), numberOfCategoriesToDelete,
+				categoriesPage.categoriesCheckboxes, 0);
+		Select bulkDropDownSelect = new Select(categoriesPage.bulkActionDropDown);
+		bulkDropDownSelect.selectByVisibleText("Delete");
+		categoriesPage.applyButton.click();
 	}
 
 	@Then("^verify the categories have been deleted$")
 	public void verify_the_categories_have_been_deleted() {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		numberOfItemsAfterDeletion = Integer.parseInt(categoriesPage.itemCountText.getText().split(" ")[0]);
+		assertEquals(numberOfItemsAfterDeletion, numberOfItemsBeforeDeletion-numberOfCategoriesToDelete);
 	}
 }
