@@ -89,18 +89,18 @@ public class TopMenuStepDefs {
 
 	@Then("^I search for \"([^\"]*)\"$")
 	public void i_search_for(String arg1) {
-		// click on seach button and enter word "Istanbul"
+		// click on seach button and enter word "new"
 		BrowserUtils.waitFor(3);
 		topmenupage.search.click();
-		topmenupage.search.sendKeys("istanbul" + Keys.ENTER);
+		topmenupage.search.sendKeys("new" + Keys.ENTER);
 	}
 
 	@Then("^I verify search is displayed$")
 	public void i_verify_search_is_displayed() {
 		// verify search result is displayed
 		
-		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results"));
+		assertTrue(topmenupage.textSearchResult.getText().equalsIgnoreCase("Search Results for: new"));
 		// verify page title contains search term
-		assertTrue(topmenupage.getTitle().contains("istanbul"));
+		assertTrue(topmenupage.getTitle().contains("new"));
 	}
 }

@@ -14,7 +14,7 @@ Feature: Cybertek Blog top menu options
 
    Scenario: Search by given text
    When I click on Cybertek Blog menu
-   Then I search for "Istanbul" 
+   Then I search for "new" 
    Then I verify search is displayed
    Then I will logout
    

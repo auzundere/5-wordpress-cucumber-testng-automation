@@ -60,13 +60,13 @@ public class TopMenuPage {
 	@FindBy(id = "search-submit")
 	public WebElement searchUsersButton;
 
-	@FindBy(xpath = "//div[@class='header section-inner']/h1")
+	@FindBy(linkText="Cybertek's Blog!")
 	public WebElement header;
 
 	@FindBy(id = "adminbar-search")
 	public WebElement search;
 
-	@FindBy(xpath = "//div[@class='page-title']/p")
+	@FindBy(xpath = "//h1[@class='page-title']")
 	public WebElement textSearchResult;
 
 	@FindBy(xpath = "//div[@class='page-title']/h4")
