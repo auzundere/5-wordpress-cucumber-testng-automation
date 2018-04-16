@@ -12,10 +12,10 @@ Feature: Cybertek Blog top menu options
     Then I will logout
    
 
-   Scenario: Search by given text
-   When I click on Cybertek Blog menu
-   Then I search for "new" 
-   Then I verify search is displayed
-   Then I will logout
+   #Scenario: Search by given text
+   #When I click on Cybertek Blog menu
+   #Then I search for "new" 
+   #Then I verify search is displayed
+   #Then I will logout
    
    
