@@ -13,6 +13,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 		glue = "com/wordpress/step_defs",
 		dryRun=false
 )
-public class SmokeTestRunner extends AbstractTestNGCucumberTests {
+public class SmokeTestsRunner extends AbstractTestNGCucumberTests {
 
 }
