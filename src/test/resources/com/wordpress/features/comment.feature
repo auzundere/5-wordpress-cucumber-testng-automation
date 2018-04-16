@@ -1,3 +1,4 @@
+@regression @Comments
 Feature: Add a comment to blog post
 
 
@@ -12,7 +13,7 @@ Given I login to the blog
 	Then I click post comment button
 	Then Verify comment added successfully
 	Then I will logout
-	@Comments
+	
 	Scenario: I check the Bulk Actions at the commets page
 	Then I click the checkbox
 	Then I hover over on the bulk actions

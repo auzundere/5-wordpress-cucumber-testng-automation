@@ -5,11 +5,12 @@
 # - search page
 # - edit page [change the size of image, add title of image]
 # - delete page
+@regression @Page2
 Feature: Create new page with image and text
 
   Background: 
     Given I login to the blog
-@Page2
+
   Scenario: Create the new page menu
     When I create new page
     Then I check that Page "Add new page" loaded correctly
@@ -17,7 +18,7 @@ Feature: Create new page with image and text
     Then verify the Page with Image and text has been created correctly
     Then I will logout
     
-@Page2
+
  Scenario: Delete Page
     When I search the page "Page with Image and Text"
     Then I delete the page "Page with Image and Text"

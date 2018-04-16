@@ -1,4 +1,4 @@
-@smoke
+@regression @smoke @dashboard
 Feature: Verifying Top and Left Menu Items and Dashboard Page
   
 

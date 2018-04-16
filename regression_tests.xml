@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="WordPress Regresssion Automation" verbose="2">
+	<test name="Regresssion tests">
+		<classes>
+			<class name="com.wordpress.runners.SmokeTestsRunner"></class>
+		</classes>
+	</test>
+</suite>
